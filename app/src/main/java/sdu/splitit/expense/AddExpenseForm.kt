@@ -38,7 +38,7 @@ fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
                 text = "Add New Expense",
