@@ -10,12 +10,12 @@ class ExpenseViewModel: ViewModel() {
 
     init {
         val sampleUsers = listOf(
-            User(1, "Henrik", "Christensen"),
-            User(2, "Morten", "Andersen"),
-            User(3, "Andreas", "Honoré"),
-            User(4, "Mathias", "Sundby"),
-            User(5, "Lasse", "Hvilsted"),
-            User(6, "Marcus", "Ellested"),
+            User(1, "Henrik", "Christensen", "12345678", "https://randomuser.me/api/portraits"),
+            User(2, "Morten", "Andersen", "12345678", "https://randomuser.me/api/portraits"),
+            User(3, "Andreas", "Honoré", "12345678", "https://randomuser.me/api/portraits"),
+            User(4, "Mathias", "Sundby", "12345678", "https://randomuser.me/api/portraits"),
+            User(5, "Lasse", "Hvilsted", "12345678", "https://randomuser.me/api/portraits"),
+            User(6, "Marcus", "Ellested", "12345678", "https://randomuser.me/api/portraits"),
 
         )
         groups.add(Group(id = 1, name = "Hackermen", members = sampleUsers, expenses = mutableListOf()))

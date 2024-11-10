@@ -16,13 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import kotlin.contracts.contract
+
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun AddRegisterForm(viewModel: RegisterViewModel) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
+    var phoneNumber by remember { mutableStateOf("") }
     var selectedImgUri by remember { mutableStateOf<Uri?>(null) }
 
     Box(
@@ -93,8 +94,8 @@ fun AddRegisterForm(viewModel: RegisterViewModel) {
                 )
 
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = phoneNumber,
+                    onValueChange = { phoneNumber = it },
                     label = { Text("Phone Number", color = Color.Gray) },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -146,7 +147,7 @@ fun AddRegisterForm(viewModel: RegisterViewModel) {
         //Register User Button
         FilledTonalButton(
             onClick = {
-                //viewModel.registerUser(firstName, lastName)
+                viewModel.registerUser(firstName, lastName, phoneNumber, selectedImgUri?.toString())
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
