@@ -1,4 +1,4 @@
-package sdu.splitit.register
+package sdu.splitit.views.register
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -16,11 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import kotlin.contracts.contract
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
-fun AddRegisterForm(viewModel: RegisterViewModel) {
+fun RegisterForm(viewModel: RegisterViewModel) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var selectedImgUri by remember { mutableStateOf<Uri?>(null) }
