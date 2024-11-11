@@ -1,6 +1,7 @@
 package sdu.splitit.view
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,14 +15,16 @@ import sdu.splitit.ui.theme.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import java.util.regex.Pattern
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun AddRegisterForm(viewModel: AuthViewModel) {
+fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
@@ -208,14 +211,19 @@ fun AddRegisterForm(viewModel: AuthViewModel) {
         //Register User Button
         FilledTonalButton(
             onClick = {
-                viewModel.registerUser(
-                    userFirstName = firstName,
-                    userLastName = lastName,
-                    userPhoneNumber = phoneNumber,
-                    userEmail = email,
-                    userPassword = password,
-                    userImageUri = selectedImgUri
-                )
+                try {
+                    viewModel.registerUser(
+                        userFirstName = firstName,
+                        userLastName = lastName,
+                        userPhoneNumber = phoneNumber,
+                        userEmail = email,
+                        userPassword = password,
+                        userImageUri = selectedImgUri
+                    )
+                } catch (e: Exception) {
+                    //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
+                }
+
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)

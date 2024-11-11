@@ -1,6 +1,7 @@
 package sdu.splitit.viewmodel
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.jan.supabase.auth.auth
@@ -35,7 +36,6 @@ class AuthViewModel : ViewModel() {
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
 
             }
         }

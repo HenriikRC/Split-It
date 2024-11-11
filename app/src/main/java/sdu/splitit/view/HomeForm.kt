@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import sdu.splitit.viewmodel.AuthViewModel
 
 @Composable
-fun HomePageForm() {
+fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
 
     Box(
         contentAlignment = Alignment.Center,
