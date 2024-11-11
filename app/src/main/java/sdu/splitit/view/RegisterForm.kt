@@ -6,7 +6,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import sdu.splitit.viewmodel.RegisterViewModel
+import sdu.splitit.viewmodel.AuthViewModel
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +21,7 @@ import java.util.regex.Pattern
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun AddRegisterForm(viewModel: RegisterViewModel) {
+fun AddRegisterForm(viewModel: AuthViewModel) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
@@ -208,7 +208,14 @@ fun AddRegisterForm(viewModel: RegisterViewModel) {
         //Register User Button
         FilledTonalButton(
             onClick = {
-                //viewModel.registerUser(firstName, lastName)
+                viewModel.registerUser(
+                    userFirstName = firstName,
+                    userLastName = lastName,
+                    userPhoneNumber = phoneNumber,
+                    userEmail = email,
+                    userPassword = password,
+                    userImageUri = selectedImgUri
+                )
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
