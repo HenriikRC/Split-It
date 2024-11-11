@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import sdu.splitit.View.GroupsOverview
 import sdu.splitit.View.HomePageForm
 import sdu.splitit.View.LoginForm
 import sdu.splitit.View.RegisterForm
@@ -31,6 +32,9 @@ fun AppNavigation(authViewModel: AuthViewModel) {
                 authViewModel,
                 navController = navController
             )
+        }
+        composable("groupsOverview") {
+            GroupsOverview(navController = navController)
         }
     })
 }

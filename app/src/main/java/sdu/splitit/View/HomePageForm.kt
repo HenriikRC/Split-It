@@ -27,7 +27,7 @@ fun HomePageForm(authViewModel: AuthViewModel, navController: NavController) {
                 navController.navigate("login")
             }
             else -> {
-
+                navController.navigate("groupsOverview")
             }
         }
     }
