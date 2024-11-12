@@ -1,4 +1,4 @@
-package sdu.splitit.view
+package sdu.splitit.views.authentication
 
 import android.net.Uri
 import android.widget.Toast
