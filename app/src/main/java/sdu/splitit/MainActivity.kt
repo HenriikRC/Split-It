@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import sdu.splitit.ui.theme.SplitItTheme
 import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import sdu.splitit.views.groups.GroupsOverview
 
@@ -12,10 +13,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val viewModel = GroupsOverviewViewModel()
-            GroupsOverview(
-                viewModel = viewModel,
-            )
+            SplitItTheme(dynamicColor = false) {
+                val viewModel = GroupsOverviewViewModel()
+                GroupsOverview(
+                    viewModel = viewModel,
+                )
+            }
         }
     }
 }
