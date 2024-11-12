@@ -6,6 +6,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import sdu.splitit.viewmodel.AuthViewModel
 import androidx.compose.material3.*
@@ -13,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import sdu.splitit.ui.theme.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -201,38 +202,53 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
                 AsyncImage(
                     model = selectedImgUri,
                     contentDescription = "Profile Picture",
-                    modifier = Modifier.size(100.dp),
-                    contentScale = ContentScale.Crop
+                    modifier = Modifier.size(100.dp).clip(CircleShape),
+                    contentScale = ContentScale.Crop,
                 )
             }
         }
 
 
-        //Register User Button
-        FilledTonalButton(
-            onClick = {
-                try {
-                    viewModel.registerUser(
-                        userFirstName = firstName,
-                        userLastName = lastName,
-                        userPhoneNumber = phoneNumber,
-                        userEmail = email,
-                        userPassword = password,
-                        userImageUri = selectedImgUri
-                    )
-                } catch (e: Exception) {
-                    //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
-                }
-
-            },
+        Column(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 72.dp),
-
-            colors = ButtonDefaults.buttonColors(Teal)
+                .padding(bottom = 8.dp)
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Register User")
+            //Register User Button
+            FilledTonalButton(
+                onClick = {
+                    try {
+                        viewModel.registerUser(
+                            userFirstName = firstName,
+                            userLastName = lastName,
+                            userPhoneNumber = phoneNumber,
+                            userEmail = email,
+                            userPassword = password,
+                            userImageUri = selectedImgUri
+                        )
+                        NavHostController.navigate("home")
+                    } catch (e: Exception) {
+                        //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
+                    }
+
+                },
+
+                colors = ButtonDefaults.buttonColors(Teal)
+            ) {
+                Text("Register User")
+            }
+
+            TextButton(
+                onClick = {
+                    NavHostController.navigate("login")
+                },
+            ){
+                Text("Already have an account? Login")
+            }
         }
+
     }
 }
 
