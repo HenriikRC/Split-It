@@ -6,9 +6,10 @@ import sdu.splitit.model.User
 
 class GroupsOverviewViewModel: ViewModel() {
     val groups = mutableListOf<Group>()
+    val sampleUsers: List<User>
 
     init {
-        val sampleUsers = listOf(
+        sampleUsers = listOf(
             User(1, "Henrik", "Christensen", balance = hashMapOf(
                 1 to 200.00,
                 2 to 55.00,
@@ -62,7 +63,9 @@ class GroupsOverviewViewModel: ViewModel() {
         groups.add(Group(id = 4, name = "The Inbetweeners", members = listOf(sampleUsers[0], sampleUsers[3]), expenses = mutableListOf()))
     }
 
-
+    fun addMockGroup() {
+        groups.add(Group(id = 5, name = "lol", members = sampleUsers, expenses = mutableListOf()))
+    }
 
 
 

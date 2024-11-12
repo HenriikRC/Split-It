@@ -19,7 +19,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "Login"
+        startDestination = "login"
     ) {
 
         composable("register") {
@@ -46,7 +46,8 @@ fun AppNavigation() {
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = GroupsOverviewViewModel(),
-                NavHostController = navController
+                NavHostController = navController,
+                onAddNewGroup = { GroupsOverviewViewModel().addMockGroup() }
             )
         }
 
