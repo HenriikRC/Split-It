@@ -33,20 +33,14 @@ fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Column {
-                Text("First Name: ${viewModel.userMetadata.value?.userFirstName}")
-                Text("Last Name: ${viewModel.userMetadata.value?.userLastName}")
-                Text("Phone Number: ${viewModel.userMetadata.value?.userPhoneNumber}")
-                Text("Email: ${viewModel.userMetadata.value?.userEmail}")
-            }
 
-            FilledTonalButton(
+            /*FilledTonalButton(
                 onClick = {
                     viewModel.logoutUser()
                     NavHostController.navigate("login")
                 },
                 content = { Text("Logout") }
-            )
+            )*/
         }
     }
 }

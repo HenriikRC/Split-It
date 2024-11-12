@@ -14,15 +14,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import sdu.splitit.R
 
-@Preview
+
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(NavHostController: NavHostController) {
     var selectedImgUri by remember { mutableStateOf<Uri?>(null) }
 
     Column(

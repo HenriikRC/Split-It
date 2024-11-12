@@ -12,6 +12,7 @@ import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import sdu.splitit.views.authentication.AddRegisterForm
 import sdu.splitit.views.authentication.LoginForm
 import sdu.splitit.views.groups.GroupsOverview
+import sdu.splitit.views.profile.ProfileScreen
 
 @Composable
 fun AppNavigation() {
@@ -19,7 +20,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "Login"
+        startDestination = "Profile"
     ) {
 
         composable("register") {
@@ -46,6 +47,11 @@ fun AppNavigation() {
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = GroupsOverviewViewModel(),
+                NavHostController = navController
+            )
+        }
+        composable("Profile") {
+            ProfileScreen(
                 NavHostController = navController
             )
         }
