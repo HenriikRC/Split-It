@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import sdu.splitit.R
+import sdu.splitit.ui.theme.Gray
 
 
 @Composable
@@ -30,7 +31,7 @@ fun ProfileScreen(NavHostController: NavHostController) {
             .fillMaxSize()
             .background(Color(0xFFECECEC))
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp)
+
     ) {
         Box(
             modifier = Modifier
@@ -38,6 +39,7 @@ fun ProfileScreen(NavHostController: NavHostController) {
                 .height(200.dp),
             contentAlignment = Alignment.Center
         ) {
+
             Image(
                 painter = painterResource(id = R.drawable.wave),
                 contentDescription = "Wave background",
@@ -51,7 +53,8 @@ fun ProfileScreen(NavHostController: NavHostController) {
                 painter = painterResource(id = R.drawable.icon_information),
                 contentDescription = "Profile Picture",
                 modifier = Modifier
-                    .size(90.dp)
+                    .padding(top = 30.dp)
+                    .size(100.dp)
                     .align(Alignment.Center)
             )
         }
@@ -74,14 +77,13 @@ fun ProfileScreen(NavHostController: NavHostController) {
             color = Color.Gray,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Account Options
         AccountOptionButton(
             iconId = R.drawable.icon_payment,
             text = "Payment Methods",
-            onClick = { /* Handle click */ }
+            onClick = { /* Handle click */ },
         )
 
         AccountOptionButton(
@@ -116,8 +118,8 @@ fun AccountOptionButton(iconId: Int, text: String, onClick: () -> Unit) {
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE0E0E0)),
+            .padding(vertical = 12.dp, horizontal = 32.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Gray),
         contentPadding = PaddingValues(16.dp),
         elevation = ButtonDefaults.elevatedButtonElevation(8.dp)
     ) {
