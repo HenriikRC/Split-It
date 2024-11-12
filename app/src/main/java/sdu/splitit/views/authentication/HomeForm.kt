@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.github.jan.supabase.auth.auth
 import sdu.splitit.ui.theme.GreenPrimary
 import sdu.splitit.viewmodel.AuthViewModel
 

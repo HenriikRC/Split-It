@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import sdu.splitit.view.AddRegisterForm
-import sdu.splitit.view.LoginForm
 import sdu.splitit.viewmodel.AuthViewModel
+import sdu.splitit.views.authentication.AddRegisterForm
+import sdu.splitit.views.authentication.LoginForm
 
 @Composable
 fun AppNavigation() {
