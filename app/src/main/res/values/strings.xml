@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SplitIt</string>
+    <string name="profile_pic_description">Profile picture</string>
 </resources>

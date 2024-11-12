@@ -24,10 +24,9 @@
             </intent-filter>
         </activity>
 
-        <!-- Add this entry for ProfileActivity -->
+        <!-- Set the same theme for ProfileActivity -->
         <activity android:name=".ProfileActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight"/>
+            android:theme="@style/Theme.SplitIt"/>
     </application>
-
 </manifest>
