@@ -17,7 +17,6 @@ class ExpenseViewModel: ViewModel() {
             User(4, "Mathias", "Sundby"),
             User(5, "Lasse", "Hvilsted"),
             User(6, "Marcus", "Ellested"),
-
         )
         groups.add(Group(id = 1, name = "Hackermen", members = sampleUsers, expenses = mutableListOf()))
     }
@@ -77,6 +76,5 @@ class ExpenseViewModel: ViewModel() {
     private fun generateExpenseId(): Int {
         return groups.flatMap { it.expenses }.size + 1
     }
-
-
-}*/
+}
+ */
