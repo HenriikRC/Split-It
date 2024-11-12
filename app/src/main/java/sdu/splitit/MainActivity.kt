@@ -5,8 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import sdu.splitit.ui.theme.SplitItTheme
-import sdu.splitit.viewmodel.GroupsOverviewViewModel
-import sdu.splitit.views.groups.GroupsOverview
+import sdu.splitit.views.profile.ProfileScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,10 +13,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SplitItTheme(dynamicColor = false) {
-                val viewModel = GroupsOverviewViewModel()
-                GroupsOverview(
-                    viewModel = viewModel,
-                )
+                // Display ProfileScreen here to test it
+                ProfileScreen()
             }
         }
     }
