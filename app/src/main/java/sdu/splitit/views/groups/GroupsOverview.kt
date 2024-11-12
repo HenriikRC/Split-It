@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
@@ -157,7 +158,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GroupsOverview(viewModel: GroupsOverviewViewModel, onAddNewGroup: () -> Unit) {
+fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavController, onAddNewGroup: () -> Unit) {
     val listState = rememberLazyListState()
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp // Use device screen height dynamically

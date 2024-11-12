@@ -8,13 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import sdu.splitit.model.User
 import sdu.splitit.ui.theme.*
 import sdu.splitit.viewmodel.ExpenseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int) {
+fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int, NavHostController: NavController) {
     var title by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
@@ -207,4 +208,4 @@ fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int) {
         }
     }
 }
-*/
+ */
