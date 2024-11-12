@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
@@ -148,7 +149,7 @@ fun GroupCard(group: Group, user: User) {
 }
 
 @Composable
-fun GroupsOverview(viewModel: GroupsOverviewViewModel) {
+fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
