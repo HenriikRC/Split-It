@@ -46,7 +46,8 @@ fun AppNavigation() {
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = GroupsOverviewViewModel(),
-                NavHostController = navController
+                NavHostController = navController,
+                onAddNewGroup = { GroupsOverviewViewModel().addMockGroup() }
             )
         }
 
