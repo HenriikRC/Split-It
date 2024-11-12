@@ -1,4 +1,4 @@
-package sdu.splitit.view
+package sdu.splitit.views.authentication
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
