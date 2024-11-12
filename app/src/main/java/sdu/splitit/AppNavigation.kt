@@ -3,6 +3,7 @@ package sdu.splitit
 //import AddExpenseForm
 import HomePageForm
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,6 +13,7 @@ import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import sdu.splitit.views.authentication.AddRegisterForm
 import sdu.splitit.views.authentication.LoginForm
 import sdu.splitit.views.groups.GroupsOverview
+import sdu.splitit.views.profile.ProfileInformationScreen
 import sdu.splitit.views.profile.ProfileScreen
 
 @Composable
@@ -50,8 +52,10 @@ fun AppNavigation() {
                 NavHostController = navController
             )
         }
+        composable("ProfileInformation") { ProfileInformationScreen() }
         composable("Profile") {
             ProfileScreen(
+                viewModel = viewModel(), // Pass the same viewModel instance used in login/register
                 NavHostController = navController
             )
         }

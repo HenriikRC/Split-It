@@ -2,6 +2,7 @@ package sdu.splitit.viewmodel
 
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.jan.supabase.auth.auth
@@ -12,6 +13,12 @@ import kotlinx.serialization.json.put
 import sdu.splitit.model.SupabaseClient
 
 class AuthViewModel : ViewModel() {
+
+    var userFirstName by mutableStateOf("")
+    var userLastName by mutableStateOf("")
+    var userPhoneNumber by mutableStateOf("")
+    var userEmail by mutableStateOf("")
+    var userImageUri by mutableStateOf<Uri?>(null)
 
     fun registerUser(
         userFirstName: String,
@@ -35,6 +42,12 @@ class AuthViewModel : ViewModel() {
                         put("profile_picture", userImageUri.toString())
                     }
                 }
+                // Store the data locally in the ViewModel
+                this@AuthViewModel.userFirstName = userFirstName
+                this@AuthViewModel.userLastName = userLastName
+                this@AuthViewModel.userPhoneNumber = userPhoneNumber
+                this@AuthViewModel.userEmail = userEmail
+                this@AuthViewModel.userImageUri = userImageUri
             } catch (e: Exception) {
 
             }

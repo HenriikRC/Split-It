@@ -18,13 +18,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import sdu.splitit.R
 import sdu.splitit.ui.theme.Gray
+import sdu.splitit.viewmodel.AuthViewModel
 
 
 @Composable
-fun ProfileScreen(NavHostController: NavHostController) {
-    var selectedImgUri by remember { mutableStateOf<Uri?>(null) }
+fun ProfileScreen(viewModel: AuthViewModel, NavHostController: NavHostController) {
+
+    val userFirstName = viewModel.userFirstName
+    val userLastName = viewModel.userLastName
+    val userEmail = viewModel.userEmail
+    val userImageUri = viewModel.userImageUri
 
     Column(
         modifier = Modifier
@@ -48,7 +54,17 @@ fun ProfileScreen(NavHostController: NavHostController) {
                     .fillMaxWidth()
                     .height(200.dp)
             )
-
+            userImageUri?.let {
+                Image(
+                    painter = rememberAsyncImagePainter(it),
+                    contentDescription = "Profile Picture",
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                        .size(100.dp)
+                        .align(Alignment.Center)
+                )
+            }
+            /*
             Image(
                 painter = painterResource(id = R.drawable.icon_information),
                 contentDescription = "Profile Picture",
@@ -57,6 +73,7 @@ fun ProfileScreen(NavHostController: NavHostController) {
                     .size(100.dp)
                     .align(Alignment.Center)
             )
+            */
         }
 
 
@@ -64,15 +81,15 @@ fun ProfileScreen(NavHostController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Name",
             fontSize = 25.sp,
+            text = "$userFirstName $userLastName",
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
         Text(
-            text = "email@example.com",
+            text = userEmail,
             fontSize = 20.sp,
             color = Color.Gray,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -89,7 +106,7 @@ fun ProfileScreen(NavHostController: NavHostController) {
         AccountOptionButton(
             iconId = R.drawable.icon_information,
             text = "Profile Information",
-            onClick = { /* Handle click */ }
+            onClick = { NavHostController.navigate("ProfileInformation") }
         )
 
         AccountOptionButton(
@@ -144,4 +161,5 @@ fun AccountOptionButton(iconId: Int, text: String, onClick: () -> Unit) {
         }
     }
 }
+
 
