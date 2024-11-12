@@ -1,3 +1,4 @@
+/*
 package sdu.splitit.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -78,4 +79,4 @@ class ExpenseViewModel: ViewModel() {
     }
 
 
-}
+}*/
