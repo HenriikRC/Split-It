@@ -17,6 +17,7 @@ class MainActivity : ComponentActivity() {
                 val viewModel = GroupsOverviewViewModel()
                 GroupsOverview(
                     viewModel = viewModel,
+                    onAddNewGroup = { viewModel.addMockGroup() }
                 )
             }
         }
