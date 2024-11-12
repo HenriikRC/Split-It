@@ -1,17 +1,21 @@
 package sdu.splitit.viewmodel
 
 import android.net.Uri
-import android.widget.Toast
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import sdu.splitit.model.SupabaseClient
 
 class AuthViewModel : ViewModel() {
+
+    val client = SupabaseClient.client
 
     fun registerUser(
         userFirstName: String,
@@ -23,7 +27,7 @@ class AuthViewModel : ViewModel() {
     ) {
         viewModelScope.launch {
             try {
-                val auth = SupabaseClient.client.auth
+                val auth = client.auth
 
                 val signUpResult = auth.signUpWith(Email) {
                     email = userEmail
@@ -40,4 +44,30 @@ class AuthViewModel : ViewModel() {
             }
         }
     }
+
+    fun loginUser(
+        userEmail: String,
+        userPassword: String
+    ) {
+        viewModelScope.launch {
+            try {
+                val auth = client.auth
+
+                val signInResult = auth.signInWith(Email) {
+                    email = userEmail
+                    password = userPassword
+                }
+
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun logoutUser() {
+        viewModelScope.launch {
+            SupabaseClient.client.auth.signOut()
+        }
+    }
+
 }
