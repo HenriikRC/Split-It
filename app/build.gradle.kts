@@ -77,12 +77,16 @@ dependencies {
     implementation(libs.coil.compose)
 
     // Supabase
-    implementation ("io.github.jan-tennert.supabase:postgrest-kt:3.0.0")
-    implementation ("io.github.jan-tennert.supabase:storage-kt:3.0.0")
-    implementation ("io.github.jan-tennert.supabase:auth-kt:3.0.0")
-    implementation ("io.ktor:ktor-client-android:3.0.0")
-    implementation ("io.ktor:ktor-client-core:3.0.0")
-    implementation ("io.ktor:ktor-utils:3.0.0")
+        implementation ("io.github.jan-tennert.supabase:postgrest-kt:3.0.0")
+        implementation ("io.github.jan-tennert.supabase:storage-kt:3.0.0")
+        implementation ("io.github.jan-tennert.supabase:auth-kt:3.0.0")
+        implementation ("io.ktor:ktor-client-android:3.0.0")
+        implementation ("io.ktor:ktor-client-core:3.0.0")
+        implementation ("io.ktor:ktor-utils:3.0.0")
 
+            // Hilt
+            implementation( "com.google.dagger:hilt-android:1.2.0")
+            annotationProcessor( "com.google.dagger:hilt-compiler:1.2.0")
+            implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 }

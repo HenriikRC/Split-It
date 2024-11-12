@@ -1,21 +1,20 @@
-package sdu.splitit.viewmodel
+package sdu.splitit.viewmodel.authentication
 
 import android.net.Uri
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
-import sdu.splitit.model.SupabaseClient
+import kotlinx.coroutines.withContext
+import sdu.splitit.model.User
+import javax.inject.Inject
 
-class AuthViewModel : ViewModel() {
-
-    val client = SupabaseClient.client
+class AuthViewModel @Inject constructor(
+    private val authenticationRepository: AuthenticationRepository
+) : ViewModel() {
 
     fun registerUser(
         userFirstName: String,
@@ -23,21 +22,26 @@ class AuthViewModel : ViewModel() {
         userPhoneNumber: String,
         userEmail: String,
         userPassword: String,
-        userImageUri: Uri?
+        userImageUri: String
     ) {
         viewModelScope.launch {
             try {
-                val auth = client.auth
+                val user: User = User(
+                    userFirstName,
+                    userLastName,
+                    userPhoneNumber,
+                    userEmail,
+                    hashMapOf(),
+                    userImageUri
+                )
 
-                val signUpResult = auth.signUpWith(Email) {
-                    email = userEmail
+                val signUpResult = authenticationRepository.signUp(
+                    email = userEmail,
                     password = userPassword
-                    data = buildJsonObject {
-                        put("first_name", userFirstName)
-                        put("last_name", userLastName)
-                        put("phone_number", userPhoneNumber)
-                        put("profile_picture", userImageUri.toString())
-                    }
+                )
+
+                if (signUpResult != null) {
+                    val userId = 
                 }
             } catch (e: Exception) {
 

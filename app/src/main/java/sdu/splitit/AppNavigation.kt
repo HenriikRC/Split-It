@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import sdu.splitit.viewmodel.AuthViewModel
+import sdu.splitit.viewmodel.authentication.AuthViewModel
 //import sdu.splitit.viewmodel.ExpenseViewModel
 import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import sdu.splitit.views.authentication.AddRegisterForm

@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import sdu.splitit.ui.theme.GreenPrimary
-import sdu.splitit.viewmodel.AuthViewModel
+import sdu.splitit.viewmodel.authentication.AuthViewModel
 
 @Composable
 fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
