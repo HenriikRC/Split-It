@@ -1,5 +1,6 @@
 package sdu.splitit.views.groups
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,20 +41,20 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavHostController
 import sdu.splitit.R
 import sdu.splitit.views.user.ProfileButton
 import sdu.splitit.views.user.UserAvatar
 
 @Composable
-fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, navController: NavController) {
+fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(8.dp))
             .fillMaxWidth()
             .background( MaterialTheme.colorScheme.tertiary )
-            .clickable {
-                navController.navigate("groupDetails")
-            }
+            .clickable { onClick() }
+
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -118,15 +119,18 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, navController: NavControl
                         .firstOrNull { it.index == index }
                         ?.offset ?: 0
 
-                    val opacity = min(1f, 1f - (itemOffset / screenHeight.value))
-                    GroupCard(
-                        group = group,
-                        user = viewModel.groups[0].members[0],
-                        modifier = Modifier.graphicsLayer(alpha = opacity),
-                        navController = navController
-                    )
-                }
+                val opacity = min(1f, 1f - (itemOffset / screenHeight.value))
+                GroupCard(
+                    group = group,
+                    user = viewModel.groups[0].members[0],
+                    modifier = Modifier.graphicsLayer(alpha = opacity),
+                    onClick = {
+                        navController.navigate("groupDetails/${group.id}")
+                    }
+
+                )
             }
+        }
 
             Box(
                 contentAlignment = Alignment.BottomCenter,
