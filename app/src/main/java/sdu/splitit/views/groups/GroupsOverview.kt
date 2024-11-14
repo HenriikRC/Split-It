@@ -142,12 +142,6 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, navContro
                 fontFamily = FontFamily.SansSerif
             )
 
-//            Text(
-//                text = group.members.joinToString(", ", "Group members: ", ".") { it.firstName },
-//                fontSize = 16.sp,
-//                fontFamily = FontFamily.SansSerif
-//            )
-
             Row(
                 horizontalArrangement = Arrangement.spacedBy((-6).dp),
                 modifier = Modifier
