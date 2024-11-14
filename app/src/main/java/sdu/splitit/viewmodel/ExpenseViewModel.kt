@@ -1,4 +1,3 @@
-/*
 package sdu.splitit.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -11,12 +10,13 @@ class ExpenseViewModel: ViewModel() {
 
     init {
         val sampleUsers = listOf(
-            User(1, "Henrik", "Christensen"),
-            User(2, "Morten", "Andersen"),
-            User(3, "Andreas", "Honoré"),
-            User(4, "Mathias", "Sundby"),
-            User(5, "Lasse", "Hvilsted"),
-            User(6, "Marcus", "Ellested"),
+
+            User(1, "Henrik", "Christensen", hashMapOf(),""),
+            User(2, "Morten", "Andersen", hashMapOf(),""),
+            User(3, "Andreas", "Honoré", hashMapOf(),""),
+            User(4, "Mathias", "Sundby", hashMapOf(),""),
+            User(5, "Lasse", "Hvilsted", hashMapOf(),""),
+            User(6, "Marcus", "Ellested", hashMapOf(),"")
         )
         groups.add(Group(id = 1, name = "Hackermen", members = sampleUsers, expenses = mutableListOf()))
     }
@@ -24,7 +24,6 @@ class ExpenseViewModel: ViewModel() {
     fun getGroupById(groupId: Int): Group? {
         return groups.find { it.id == groupId }
     }
-
 
     fun addExpense(
         groupId: Int,
@@ -61,20 +60,22 @@ class ExpenseViewModel: ViewModel() {
         } else {
             expense.amount / expense.participants.size
         }
-
         expense.participants.forEach { participant ->
-            participant.balance -= splitAmount
-            expense.payer.balance += splitAmount
+            val participantBalance = participant.balance.getOrDefault(group.id, 0.0)
+            participant.balance[group.id] = participantBalance - splitAmount
         }
+
+        val payerBalance = expense.payer.balance.getOrDefault(group.id, 0.0)
+        expense.payer.balance[group.id] = payerBalance + (splitAmount * expense.participants.size)
     }
 
     fun getBalances(groupId: Int): Map<User, Double> {
         val group = groups.find { it.id == groupId } ?: return emptyMap()
-        return group.members.associateWith { it.balance }
+        return group.members.associateWith { it.balance[groupId] ?: 0.0 }
     }
 
     private fun generateExpenseId(): Int {
         return groups.flatMap { it.expenses }.size + 1
     }
 }
- */
+
