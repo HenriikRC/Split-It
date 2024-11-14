@@ -2,6 +2,7 @@ package sdu.splitit.views.groups
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -110,12 +111,15 @@ fun UserAvatar(user: User) {
 }
 
 @Composable
-fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
+fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, navController: NavController) {
     Box(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(8.dp))
             .fillMaxWidth()
             .background( MaterialTheme.colorScheme.tertiary )
+            .clickable {
+                navController.navigate("groupDetails")
+            }
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -138,12 +142,6 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
                 fontFamily = FontFamily.SansSerif
             )
 
-//            Text(
-//                text = group.members.joinToString(", ", "Group members: ", ".") { it.firstName },
-//                fontSize = 16.sp,
-//                fontFamily = FontFamily.SansSerif
-//            )
-
             Row(
                 horizontalArrangement = Arrangement.spacedBy((-6).dp),
                 modifier = Modifier
@@ -158,7 +156,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavController, onAddNewGroup: () -> Unit) {
+fun GroupsOverview(viewModel: GroupsOverviewViewModel, navController: NavController, onAddNewGroup: () -> Unit) {
     val listState = rememberLazyListState()
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp // Use device screen height dynamically
@@ -186,7 +184,8 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavCon
                 GroupCard(
                     group = group,
                     user = viewModel.groups[0].members[0],
-                    modifier = Modifier.graphicsLayer(alpha = opacity)
+                    modifier = Modifier.graphicsLayer(alpha = opacity),
+                    navController = navController
                 )
             }
         }

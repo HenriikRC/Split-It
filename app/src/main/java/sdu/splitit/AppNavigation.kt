@@ -1,6 +1,5 @@
 package sdu.splitit
 
-//import AddExpenseForm
 import AddExpenseForm
 import HomePageForm
 import androidx.compose.runtime.Composable
@@ -9,9 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import sdu.splitit.viewmodel.AuthViewModel
 import sdu.splitit.viewmodel.ExpenseViewModel
-//import sdu.splitit.viewmodel.ExpenseViewModel
 import sdu.splitit.viewmodel.GroupsOverviewViewModel
-import sdu.splitit.views.authentication.AddRegisterForm
+import sdu.splitit.views.authentication.RegisterForm
 import sdu.splitit.views.authentication.LoginForm
 import sdu.splitit.views.groups.GroupsOverview
 
@@ -25,30 +23,30 @@ fun AppNavigation() {
     ) {
 
         composable("register") {
-            AddRegisterForm(
+            RegisterForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("home") {
             HomePageForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("login") {
             LoginForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = GroupsOverviewViewModel(),
-                NavHostController = navController,
+                navController = navController,
                 onAddNewGroup = { GroupsOverviewViewModel().addMockGroup() }
             )
         }
@@ -58,7 +56,7 @@ fun AppNavigation() {
             AddExpenseForm(
                 viewModel = ExpenseViewModel(),
                 groupId = 1,
-                NavHostController = navController
+                navController = navController
             )
         }
 

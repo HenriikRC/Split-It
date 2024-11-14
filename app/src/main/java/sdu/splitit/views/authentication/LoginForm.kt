@@ -24,7 +24,7 @@ import sdu.splitit.ui.theme.GreenPrimary
 import sdu.splitit.viewmodel.AuthViewModel
 
 @Composable
-fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
+fun LoginForm(viewModel: AuthViewModel, navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -76,7 +76,7 @@ fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
                 FilledTonalButton(
                     onClick = {
                         viewModel.loginUser(email, password)
-                        NavHostController.navigate("home")
+                        navController.navigate("home")
                     },
                     content = { Text("Login") }
 
@@ -84,7 +84,7 @@ fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
 
                 TextButton(
                     onClick = {
-                        NavHostController.navigate("register")
+                        navController.navigate("register")
                     },
                     content = { Text("Don´t have an account?") }
                 )
