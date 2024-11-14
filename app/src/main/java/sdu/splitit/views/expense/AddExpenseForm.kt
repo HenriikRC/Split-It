@@ -8,19 +8,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import sdu.splitit.model.Group
 import sdu.splitit.model.User
 import sdu.splitit.ui.theme.*
 import sdu.splitit.viewmodel.ExpenseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int, navController: NavController) {
+fun AddExpenseForm(viewModel: ExpenseViewModel, group: Group, NavHostController: NavController) {
+
     var title by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var selectedPayer by remember { mutableStateOf<User?>(null) }
     var splitEvenly by remember { mutableStateOf(true) }
-    val group = viewModel.getGroupById(groupId)
+    val group = group
     val groupMembers = group?.members ?: listOf()
 
     val participantSelection = remember { mutableStateListOf(*Array(groupMembers.size) { true }) }
@@ -182,7 +184,7 @@ fun AddExpenseForm(viewModel: ExpenseViewModel, groupId: Int, navController: Nav
                     if (selectedPayer != null && title.isNotBlank() && amount.toDoubleOrNull() != null) {
                         val selectedParticipants = groupMembers.filterIndexed { index, _ -> participantSelection[index] }
                         viewModel.addExpense(
-                            groupId = groupId,
+                            group = group,
                             title = title,
                             amount = amount.toDouble(),
                             payer = selectedPayer!!,

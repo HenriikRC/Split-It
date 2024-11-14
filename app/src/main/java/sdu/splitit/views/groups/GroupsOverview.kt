@@ -46,6 +46,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavHostController
 import sdu.splitit.R
 
 @Composable
@@ -111,15 +112,14 @@ fun UserAvatar(user: User) {
 }
 
 @Composable
-fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, navController: NavController) {
+fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(8.dp))
             .fillMaxWidth()
             .background( MaterialTheme.colorScheme.tertiary )
-            .clickable {
-                navController.navigate("groupDetails")
-            }
+            .clickable { onClick() }
+
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -185,7 +185,10 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, navController: NavControl
                     group = group,
                     user = viewModel.groups[0].members[0],
                     modifier = Modifier.graphicsLayer(alpha = opacity),
-                    navController = navController
+                    onClick = {
+                        navController.navigate("groupDetails/${group.id}")
+                    }
+
                 )
             }
         }

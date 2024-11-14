@@ -8,32 +8,19 @@ import sdu.splitit.model.User
 class ExpenseViewModel: ViewModel() {
     private val groups = mutableListOf<Group>()
 
-    init {
-        val sampleUsers = listOf(
-
-            User(1, "Henrik", "Christensen", hashMapOf(),""),
-            User(2, "Morten", "Andersen", hashMapOf(),""),
-            User(3, "Andreas", "Honoré", hashMapOf(),""),
-            User(4, "Mathias", "Sundby", hashMapOf(),""),
-            User(5, "Lasse", "Hvilsted", hashMapOf(),""),
-            User(6, "Marcus", "Ellested", hashMapOf(),"")
-        )
-        groups.add(Group(id = 1, name = "Hackermen", members = sampleUsers, expenses = mutableListOf()))
-    }
-
     fun getGroupById(groupId: Int): Group? {
         return groups.find { it.id == groupId }
     }
 
     fun addExpense(
-        groupId: Int,
+        group: Group,
         title: String,
         amount: Double,
         payer: User,
         participants: List<User>,
         isSplitEvenly: Boolean
     ) {
-        val group = groups.find { it.id == groupId } ?: return
+        val group = group ?: return
         val expense = Expense(
             id = generateExpenseId(),
             title = title,
