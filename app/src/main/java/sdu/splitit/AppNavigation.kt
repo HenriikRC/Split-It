@@ -12,7 +12,7 @@ import sdu.splitit.viewmodel.AuthViewModel
 import sdu.splitit.viewmodel.ExpenseViewModel
 import sdu.splitit.viewmodel.GroupDetailsViewModel
 import sdu.splitit.viewmodel.GroupsOverviewViewModel
-import sdu.splitit.views.authentication.AddRegisterForm
+import sdu.splitit.views.authentication.RegisterForm
 import sdu.splitit.views.authentication.LoginForm
 import sdu.splitit.views.group.GroupDetails
 import sdu.splitit.views.groups.GroupsOverview
@@ -28,31 +28,32 @@ fun AppNavigation() {
     ) {
 
         composable("register") {
-            AddRegisterForm(
+            RegisterForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("home") {
             HomePageForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("login") {
             LoginForm(
                 viewModel = AuthViewModel(),
-                NavHostController = navController
+                navController = navController
             )
         }
 
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = groupsOverviewViewModel,
-                NavHostController = navController,
+                navController = navController,
                 onAddNewGroup = { groupsOverviewViewModel.addMockGroup() }
+
             )
         }
 
@@ -84,6 +85,7 @@ fun AppNavigation() {
                 viewModel = ExpenseViewModel(),
                 group = groups[0],
                 NavHostController = navController
+
             )
         }
     }

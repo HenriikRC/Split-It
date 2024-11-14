@@ -46,6 +46,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavHostController
 import sdu.splitit.R
 
 @Composable
@@ -118,6 +119,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: 
             .fillMaxWidth()
             .background( MaterialTheme.colorScheme.tertiary )
             .clickable { onClick() }
+
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -140,12 +142,6 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: 
                 fontFamily = FontFamily.SansSerif
             )
 
-//            Text(
-//                text = group.members.joinToString(", ", "Group members: ", ".") { it.firstName },
-//                fontSize = 16.sp,
-//                fontFamily = FontFamily.SansSerif
-//            )
-
             Row(
                 horizontalArrangement = Arrangement.spacedBy((-6).dp),
                 modifier = Modifier
@@ -160,7 +156,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: 
 }
 
 @Composable
-fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavController, onAddNewGroup: () -> Unit) {
+fun GroupsOverview(viewModel: GroupsOverviewViewModel, navController: NavController, onAddNewGroup: () -> Unit) {
     val listState = rememberLazyListState()
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp // Use device screen height dynamically
@@ -190,8 +186,9 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavCon
                     user = viewModel.groups[0].members[0],
                     modifier = Modifier.graphicsLayer(alpha = opacity),
                     onClick = {
-                        NavHostController.navigate("groupDetails/${group.id}")
+                        navController.navigate("groupDetails/${group.id}")
                     }
+
                 )
             }
         }

@@ -16,6 +16,7 @@ import sdu.splitit.viewmodel.ExpenseViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddExpenseForm(viewModel: ExpenseViewModel, group: Group, NavHostController: NavController) {
+
     var title by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
