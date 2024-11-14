@@ -2,6 +2,7 @@ package sdu.splitit.views.groups
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -110,12 +111,13 @@ fun UserAvatar(user: User) {
 }
 
 @Composable
-fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
+fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(8.dp))
             .fillMaxWidth()
             .background( MaterialTheme.colorScheme.tertiary )
+            .clickable { onClick() }
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -186,7 +188,10 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavCon
                 GroupCard(
                     group = group,
                     user = viewModel.groups[0].members[0],
-                    modifier = Modifier.graphicsLayer(alpha = opacity)
+                    modifier = Modifier.graphicsLayer(alpha = opacity),
+                    onClick = {
+                        NavHostController.navigate("groupDetails/${group.id}")
+                    }
                 )
             }
         }
