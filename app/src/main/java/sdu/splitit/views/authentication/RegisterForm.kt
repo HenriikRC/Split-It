@@ -1,7 +1,6 @@
 package sdu.splitit.views.authentication
 
 import android.net.Uri
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,7 +24,7 @@ import java.util.regex.Pattern
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) {
+fun RegisterForm(viewModel: AuthViewModel, navController: NavController) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
@@ -228,7 +227,7 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
                             userPassword = password,
                             userImageUri = selectedImgUri
                         )
-                        NavHostController.navigate("home")
+                        navController.navigate("home")
                     } catch (e: Exception) {
                         //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
                     }
@@ -242,7 +241,7 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
 
             TextButton(
                 onClick = {
-                    NavHostController.navigate("login")
+                    navController.navigate("login")
                 },
             ){
                 Text("Already have an account? Login")

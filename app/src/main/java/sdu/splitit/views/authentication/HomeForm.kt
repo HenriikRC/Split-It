@@ -14,7 +14,7 @@ import sdu.splitit.ui.theme.GreenPrimary
 import sdu.splitit.viewmodel.AuthViewModel
 
 @Composable
-fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
+fun HomePageForm(viewModel: AuthViewModel, navController: NavController) {
 
     Box(
         contentAlignment = Alignment.Center,
@@ -35,7 +35,7 @@ fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
             FilledTonalButton(
                 onClick = {
                     viewModel.logoutUser()
-                    NavHostController.navigate("login")
+                    navController.navigate("login")
                 },
                 content = { Text("Logout") }
             )
