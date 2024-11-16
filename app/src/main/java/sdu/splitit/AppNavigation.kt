@@ -8,10 +8,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import sdu.splitit.viewmodel.AuthViewModel
 //import sdu.splitit.viewmodel.ExpenseViewModel
-import sdu.splitit.viewmodel.GroupsOverviewViewModel
+//import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import sdu.splitit.views.authentication.AddRegisterForm
 import sdu.splitit.views.authentication.LoginForm
-import sdu.splitit.views.groups.GroupsOverview
+//import sdu.splitit.views.groups.GroupsOverview
 
 @Composable
 fun AppNavigation() {
@@ -43,6 +43,7 @@ fun AppNavigation() {
             )
         }
 
+        /*
         composable("groupsOverview") {
             GroupsOverview(
                 viewModel = GroupsOverviewViewModel(),
@@ -50,6 +51,8 @@ fun AppNavigation() {
                 onAddNewGroup = { GroupsOverviewViewModel().addMockGroup() }
             )
         }
+
+         */
 
         /*
         composable("ExpenseForm") {

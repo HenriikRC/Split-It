@@ -1,3 +1,4 @@
+/*
 package sdu.splitit.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -70,3 +71,5 @@ class GroupsOverviewViewModel: ViewModel() {
 
 
 }
+
+ */

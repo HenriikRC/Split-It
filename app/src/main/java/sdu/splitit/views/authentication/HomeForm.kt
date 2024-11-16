@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import sdu.splitit.ui.theme.GreenPrimary
@@ -15,6 +16,8 @@ import sdu.splitit.viewmodel.AuthViewModel
 
 @Composable
 fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
+
+    val context = LocalContext.current
 
     Box(
         contentAlignment = Alignment.Center,
@@ -34,7 +37,7 @@ fun HomePageForm(viewModel: AuthViewModel, NavHostController: NavController) {
         ) {
             FilledTonalButton(
                 onClick = {
-                    viewModel.logoutUser()
+                    viewModel.logout(context)
                     NavHostController.navigate("login")
                 },
                 content = { Text("Logout") }

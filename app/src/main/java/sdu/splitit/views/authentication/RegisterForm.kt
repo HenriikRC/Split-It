@@ -17,10 +17,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import sdu.splitit.model.UserState
 import java.util.regex.Pattern
 
 @Composable
@@ -34,6 +36,10 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
     var password by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
     var selectedImgUri by remember { mutableStateOf<Uri?>(null) }
+
+    val context = LocalContext.current
+    val userState by viewModel.userState
+    var currentUserState by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -220,17 +226,11 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
             FilledTonalButton(
                 onClick = {
                     try {
-                        viewModel.registerUser(
-                            userFirstName = firstName,
-                            userLastName = lastName,
-                            userPhoneNumber = phoneNumber,
-                            userEmail = email,
-                            userPassword = password,
-                            userImageUri = selectedImgUri
-                        )
+                        viewModel.signUp(context, email, password,firstName, lastName, phoneNumber)
+                        Toast.makeText(context, viewModel.userState.toString(), Toast.LENGTH_SHORT).show()
                         NavHostController.navigate("home")
                     } catch (e: Exception) {
-                        //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, viewModel.userState.toString(), Toast.LENGTH_SHORT).show()
                     }
 
                 },
@@ -248,7 +248,20 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
                 Text("Already have an account? Login")
             }
         }
+    }
 
+    when(userState) {
+        is UserState.Loading -> {
+
+        }
+        is UserState.Success -> {
+            val message = (userState as UserState.Success).message
+            currentUserState = message
+        }
+        is UserState.Error -> {
+            val message = (userState as UserState.Error).message
+            currentUserState = message
+        }
     }
 }
 

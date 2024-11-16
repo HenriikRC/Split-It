@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import sdu.splitit.model.Group
-import sdu.splitit.viewmodel.GroupsOverviewViewModel
+//import sdu.splitit.viewmodel.GroupsOverviewViewModel
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -98,7 +98,7 @@ fun UserAvatar(user: User) {
                     .background(MaterialTheme.colorScheme.onSecondary)
             ) {
                 Text(
-                    text = "${user.firstName.first()}${user.lastName.first()}",
+                    text = "${user.firstName?.first()}${user.lastName?.first()}",
                     color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
@@ -132,7 +132,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = "Balance: " + user.balance[group.id].toString() + " $",
+                text = "Balance: " + (user.balance?.get(group.id)?.toString() ?: "" ) + " $",
                 textAlign = TextAlign.Start,
                 fontSize = 20.sp,
                 fontFamily = FontFamily.SansSerif
@@ -157,6 +157,7 @@ fun GroupCard(group: Group, user: User, modifier: Modifier = Modifier) {
     }
 }
 
+/*
 @Composable
 fun GroupsOverview(viewModel: GroupsOverviewViewModel, NavHostController: NavController, onAddNewGroup: () -> Unit) {
     val listState = rememberLazyListState()
@@ -223,3 +224,6 @@ fun AddGroupButton(onAddNewGroup: () -> Unit) {
         )
     }
 }
+
+
+ */

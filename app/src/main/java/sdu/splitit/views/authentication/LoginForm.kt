@@ -12,12 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import sdu.splitit.ui.theme.GreenPrimary
@@ -27,6 +29,17 @@ import sdu.splitit.viewmodel.AuthViewModel
 fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.isUserLoggedIn(context)
+    }
+
+    if (viewModel.isUserLoggedIn.value) {
+        LaunchedEffect(Unit) {
+            NavHostController.navigate("home")
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -75,7 +88,7 @@ fun LoginForm(viewModel: AuthViewModel, NavHostController: NavController) {
             Row {
                 FilledTonalButton(
                     onClick = {
-                        viewModel.loginUser(email, password)
+                        viewModel.signIn(context, email, password)
                         NavHostController.navigate("home")
                     },
                     content = { Text("Login") }
