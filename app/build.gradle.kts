@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -77,12 +78,14 @@ dependencies {
     implementation(libs.coil.compose)
 
     // Supabase
-    implementation ("io.github.jan-tennert.supabase:postgrest-kt:3.0.0")
-    implementation ("io.github.jan-tennert.supabase:storage-kt:3.0.0")
-    implementation ("io.github.jan-tennert.supabase:auth-kt:3.0.0")
-    implementation ("io.ktor:ktor-client-android:3.0.0")
-    implementation ("io.ktor:ktor-client-core:3.0.0")
-    implementation ("io.ktor:ktor-utils:3.0.0")
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.2"))
+    implementation ("io.github.jan-tennert.supabase:postgrest-kt:3.0.2")
+    implementation ("io.github.jan-tennert.supabase:storage-kt:3.0.2")
+    implementation ("io.github.jan-tennert.supabase:auth-kt:3.0.2")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation ("io.ktor:ktor-client-android:3.0.1")
+    implementation ("io.ktor:ktor-client-core:3.0.1")
+    implementation ("io.ktor:ktor-utils:3.0.1")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 

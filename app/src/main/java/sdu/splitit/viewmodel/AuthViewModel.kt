@@ -7,12 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import sdu.splitit.model.SharedPreferenceHelper
 import sdu.splitit.model.SupabaseClient
+import sdu.splitit.model.User
 import sdu.splitit.model.UserState
 
 
@@ -43,20 +47,24 @@ class AuthViewModel : ViewModel() {
                     }
                 }
 
-                val userId = result?.id
+                try {
+                    val user = client.from("users").insert(
+                        mapOf(
+                            "first_name" to userFirstName,
+                            "last_name" to userLastName,
+                            "email" to userEmail,
+                            "phone_number" to userPhone,
+                        )) {
+                            select()
+                            single()
+                        }
 
-                val response = client.postgrest["users"].insert(
-                    buildJsonObject {
-                        put("id", userId)
-                        put("first_name", userFirstName)
-                        put("last_name", userLastName)
-                        put("phone", userPhone)
-                        put("balance", "{}")
-                    }
-                )
+                    println(user)
+                } catch (e: Exception) {
+                    println(e.message)
+                }
                 saveToken(context)
                 _userState.value = UserState.Success("Registered user successfully")
-                println("___________________User registered successfully___________________")
             } catch (e: Exception) {
                 _userState.value = UserState.Error("Error: ${e.message}")
             }
