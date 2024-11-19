@@ -226,7 +226,7 @@ fun AddRegisterForm(viewModel: AuthViewModel, NavHostController: NavController) 
             FilledTonalButton(
                 onClick = {
                     try {
-                        viewModel.signUp(context, email, password,firstName, lastName, phoneNumber)
+                        viewModel.signUp(context, email, password,firstName, lastName, phoneNumber, selectedImgUri.toString())
                         Toast.makeText(context, viewModel.userState.toString(), Toast.LENGTH_SHORT).show()
                         NavHostController.navigate("home")
                     } catch (e: Exception) {

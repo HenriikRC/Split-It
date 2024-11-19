@@ -1,5 +1,6 @@
 package sdu.splitit.viewmodel
 
+import androidx.collection.emptyLongSet
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import sdu.splitit.model.SupabaseClient
 import sdu.splitit.model.User
 
@@ -21,25 +23,21 @@ class UserDataViewModel : ViewModel() {
     private val _userById = mutableStateOf<User?>(null)
     val userById: State<User?> = _userById
 
-    fun getCurrentUsersData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val userId = client.auth.retrieveUserForCurrentSession(true).id
-            println("User ID: $userId")
+    suspend fun getCurrentUser() : User? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val userAuthId = client.auth.retrieveUserForCurrentSession(true).id
 
-            if (userId != null) {
-                try {
-                    val user = client.from("users").select().decodeSingle<User>()
-                    _currentUser.value = user
-
-                    println("User first name: ${user.firstName}")
-                    println("User last name: ${user.lastName}")
-                    println("User phone number: ${user.phone}")
-                    println("User email: ${user.email}")
-
-                } catch (e: Exception) {
-                    println("Error fetching user data: ${e.message}")
+                if (userAuthId != null) {
+                    client.from("users").select {
+                        filter { eq("user_auth_id", userAuthId) }
+                    }.decodeSingle<User>()
+                } else {
+                    null
                 }
-            }
+            } catch (e: Exception) {
+                println("Error fetching user data: ${e.message}")
+            } as User?
         }
     }
 }

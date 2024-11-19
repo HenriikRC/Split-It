@@ -29,6 +29,7 @@ class AuthViewModel : ViewModel() {
         userFirstName: String,
         userLastName: String,
         userPhone: String,
+        userAvatar: String
     ) {
         viewModelScope.launch {
             _userState.value = UserState.Loading
@@ -45,10 +46,12 @@ class AuthViewModel : ViewModel() {
 
                 val user = client.from("users").insert(
                     mapOf(
-                        "first_name" to userFirstName,
-                        "last_name" to userLastName,
+                        "firstName" to userFirstName,
+                        "lastName" to userLastName,
                         "email" to userEmail,
-                        "phone_number" to userPhone,
+                        "phone" to userPhone,
+                        "avatar" to userAvatar
+
                     )
                 ) {
                     select()
