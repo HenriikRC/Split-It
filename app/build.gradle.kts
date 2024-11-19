@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -88,6 +87,4 @@ dependencies {
     implementation ("io.ktor:ktor-utils:3.0.1")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-
-
 }
