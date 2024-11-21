@@ -15,7 +15,7 @@ import sdu.splitit.viewmodel.ExpenseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddExpenseForm(viewModel: ExpenseViewModel, group: Group, NavHostController: NavController) {
+fun AddExpenseForm(viewModel: ExpenseViewModel, group: Group, navController: NavController) {
 
     var title by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
@@ -196,8 +196,8 @@ fun AddExpenseForm(viewModel: ExpenseViewModel, group: Group, NavHostController:
                         selectedPayer = null
                         splitEvenly = true
                         participantSelection.fill(true)
-                    } else {
                     }
+                    navController.navigate("groupDetails/${group.id}")
                 },
                 modifier = Modifier
                     .fillMaxWidth()

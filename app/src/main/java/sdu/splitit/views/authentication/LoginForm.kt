@@ -73,14 +73,14 @@ fun LoginForm(viewModel: AuthViewModel, navController: NavController) {
             }
 
             Row {
-                /*FilledTonalButton(
+                FilledTonalButton(
                     onClick = {
                         viewModel.loginUser(email, password)
                         navController.navigate("groupsOverview")
                     },
                     content = { Text("Login") }
 
-                )*/
+                )
 
                 TextButton(
                     onClick = {

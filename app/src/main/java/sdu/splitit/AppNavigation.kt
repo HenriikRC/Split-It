@@ -49,7 +49,7 @@ fun AppNavigation() {
 
             )
         }
-        composable("Profile") {
+        composable("profile") {
             ProfileScreen(
                 NavHostController = navController
             )
@@ -68,23 +68,18 @@ fun AppNavigation() {
             }
         }
 
-        composable("expenseForm") {
-            val groups = mutableListOf<Group>()
-            val sampleUsers = listOf(
-                User(1, "Henrik", "Christensen", hashMapOf(), ""),
-                User(2, "Morten", "Andersen", hashMapOf(), ""),
-                User(3, "Andreas", "Honoré", hashMapOf(), ""),
-                User(4, "Mathias", "Sundby", hashMapOf(), ""),
-                User(5, "Lasse", "Hvilsted", hashMapOf(), ""),
-                User(6, "Marcus", "Ellested", hashMapOf(), "")
-            )
-            groups.add(Group(id = 1, name = "Hackermen", members = sampleUsers, expenses = mutableListOf()))
-            AddExpenseForm(
-                viewModel = ExpenseViewModel(),
-                group = groups[0],
-                NavHostController = navController
+        composable("addExpense/{groupId}") { backStackEntry ->
+            val groupId = backStackEntry.arguments?.getString("groupId")?.toIntOrNull()
+            val group = groupsOverviewViewModel.groups.find { it.id == groupId }
 
-            )
+            if (group != null) {
+                AddExpenseForm(
+                    viewModel = ExpenseViewModel(),
+                    group = group,
+                    navController = navController
+
+                )
+            }
         }
     }
 }
