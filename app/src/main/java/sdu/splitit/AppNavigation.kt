@@ -1,7 +1,6 @@
 package sdu.splitit
 
 import AddExpenseForm
-import HomePageForm
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,18 +23,11 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "groupsOverview"
+        startDestination = "login"
     ) {
 
         composable("register") {
             RegisterForm(
-                viewModel = AuthViewModel(),
-                navController = navController
-            )
-        }
-
-        composable("home") {
-            HomePageForm(
                 viewModel = AuthViewModel(),
                 navController = navController
             )
