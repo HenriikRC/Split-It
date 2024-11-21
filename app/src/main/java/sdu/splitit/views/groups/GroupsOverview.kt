@@ -104,7 +104,7 @@ fun GroupsOverview(viewModel: GroupsOverviewViewModel, navController: NavControl
     ) {
         Column {
             ProfileButton(user = viewModel.groups[0].members[0], onClick = {
-                navController.navigate("profileScreen") // Navigate to the profile screen
+                navController.navigate("profile") // Navigate to the profile screen
             })
             // LazyColumn for group cards with scroll tracking
             LazyColumn(

@@ -219,15 +219,7 @@ fun RegisterForm(viewModel: AuthViewModel, navController: NavController) {
             FilledTonalButton(
                 onClick = {
                     try {
-                        viewModel.registerUser(
-                            userFirstName = firstName,
-                            userLastName = lastName,
-                            userPhoneNumber = phoneNumber,
-                            userEmail = email,
-                            userPassword = password,
-                            userImageUri = selectedImgUri
-                        )
-                        navController.navigate("home")
+                        navController.navigate("groupsOverview")
                     } catch (e: Exception) {
                         //Toast.makeText(LocalContext.current, "Error registering user", Toast.LENGTH_SHORT).show()
                     }
