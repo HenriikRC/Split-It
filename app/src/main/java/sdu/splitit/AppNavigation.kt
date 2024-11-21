@@ -15,6 +15,7 @@ import sdu.splitit.views.authentication.RegisterForm
 import sdu.splitit.views.authentication.LoginForm
 import sdu.splitit.views.group.GroupDetails
 import sdu.splitit.views.groups.GroupsOverview
+import sdu.splitit.views.profile.ProfileScreen
 
 @Composable
 fun AppNavigation() {
@@ -46,6 +47,11 @@ fun AppNavigation() {
                 navController = navController,
                 onAddNewGroup = { groupsOverviewViewModel.addMockGroup() }
 
+            )
+        }
+        composable("Profile") {
+            ProfileScreen(
+                NavHostController = navController
             )
         }
 
